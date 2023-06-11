@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Surprise GIF</title>
+  <style>
+    /* Add your desired styles here */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f8f8f8;
+    }
+    .button-container {
+      margin-top: 20px;
+    }
+    .button {
+      padding: 10px 20px;
+      background-color: #ff69b4;
+      color: #fff;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+    #countdownContainer {
+      margin-top: 20px;
+      display: none;
+    }
+    #countdown {
+      font-size: 24px;
+      color: #333;
+      font-weight: bold;
+      text-align: center;
+    }
+    #counter {
+      font-size: 48px;
+      color: #ff4081;
+      margin: 10px;
+    }
+    #quoteContainer {
+      display: none;
+      margin-top: 20px;
+    }
+    #quote {
+      font-style: italic;
+      font-size: 30px;
+      color: red;
+      text-align: center;
+      line-height: 1.5;
+      font-family: "Brush Script MT", cursive;
+    }
+  </style>
+</head>
+<body>
+  <div class="button-container">
+    <button class="button" onclick="startCountdown()">Click here for a surprise!</button>
+  </div>
+
+  <div id="countdownContainer">
+    <p id="countdown">Surprise message in <span id="counter">3</span></p>
+  </div>
+
+  <div id="quoteContainer">
+    <p id="quote"></p>
+  </div>
+
+  <div id="gifContainer" style="display: none;">
+    <img src="C:\Users\bhanu\Downloads\small.jpg" alt="Surprise GIF">
+  </div>
+
+  <script>
+    const quoteElement = document.getElementById("quote");
+    const quoteText = "Before I met you, my world was a dark room, devoid of light. But then you walked into my life like a radiant candle, illuminating every corner and bringing warmth to my soul.";
+
+    function startCountdown() {
+      var buttonContainer = document.getElementsByClassName("button-container")[0];
+      buttonContainer.style.display = "none";
+
+      var countdownContainer = document.getElementById("countdownContainer");
+      countdownContainer.style.display = "block";
+
+      var counter = 3;
+      var countdown = document.getElementById("counter");
+      countdown.textContent = counter;
+
+      var interval = setInterval(function() {
+        counter--;
+        countdown.textContent = counter;
+
+        if (counter === 0) {
+          clearInterval(interval);
+          showQuote();
+        }
+      }, 1000);
+    }
+
+    function showQuote() {
+      var countdownContainer = document.getElementById("countdownContainer");
+      countdownContainer.style.display = "none";
+
+      var quoteContainer = document.getElementById("quoteContainer");
+      quoteContainer.style.display = "block";
+
+      typeWriter(quoteText);
+    }
+
+    function typeWriter(text) {
+      let index = 0;
+      const speed = 100; // milliseconds
+
+      function typeNextCharacter() {
+        if (index < text.length) {
+          quoteElement.textContent += text.charAt(index);
+          index++;
+          setTimeout(typeNextCharacter, speed);
+        } else {
+          showGif();
+        }
+      }
+
+      typeNextCharacter();
+    }
+
+    function showGif() {
+      var quoteContainer = document.getElementById("quoteContainer");
+      quoteContainer.style.display = "block";
+
+      var gifContainer = document.getElementById("gifContainer");
+      gifContainer.style.display = "block";
+    }
+  </script>
+</body>
+</html>
